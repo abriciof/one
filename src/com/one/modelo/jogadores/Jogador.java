@@ -6,12 +6,19 @@ import com.one.modelo.cartas.*;
 public class Jogador {
     private final String nome;
     private final Mao mao = new Mao();
+    private boolean declarouUno = false;
 
     public Jogador(String nome) { this.nome = nome; }
 
     public String getNome() { return nome; }
 
     public Mao getMao() { return mao; }
+
+    public void declararUno() { declarouUno = true; }
+    public boolean deveSerPenalizadoPorNaoDeclararUno() {
+        return mao.tamanho() == 1 && !declarouUno;
+    }
+    public void resetarDeclaracaoUno() { declarouUno = false; }
 
     public int jogarTurno(Monte compra, Monte descarte) {
         Carta topo = descarte.topo();

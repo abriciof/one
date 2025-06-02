@@ -31,6 +31,8 @@ public class Monte {
             }
             m.empilhar(new CartaReverse(cor));
             m.empilhar(new CartaReverse(cor));
+            m.empilhar(new CartaBloqueio(cor));
+            m.empilhar(new CartaBloqueio(cor));
         }
         m.embaralhar();
         return m;
