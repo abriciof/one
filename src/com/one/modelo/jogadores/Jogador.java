@@ -13,8 +13,6 @@ public class Jogador {
 
     public Mao getMao() { return mao; }
 
-    /** Realiza um turno. Retorno:
-     0 = jogou número, 1 = jogou Reverse, 2 = apenas comprou  */
     public int jogarTurno(Monte compra, Monte descarte) {
         Carta topo = descarte.topo();
         Carta jogada = mao.jogarCartaValida(topo);

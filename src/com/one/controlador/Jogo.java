@@ -8,19 +8,15 @@ import com.one.modelo.jogadores.*;
 public class Jogo {
     private final Monte compra = Monte.gerarBaralhoPadrao();
     private final Monte descarte = new Monte();
-    private final FilaJogadores fila = new FilaJogadores();
+    private final ListaJogadores lista = new ListaJogadores();
 
     public Jogo(String... nomesJogadores) {
-        for (String nome : nomesJogadores) fila.adicionar(new Jogador(nome));
-        // distribuir 7 cartas a cada jogador
-//        for (int k = 0; k < 7; k++)
-//            fila.adicionar(null); // *** veremos abaixo
+        for (String nome : nomesJogadores) lista.adicionar(new Jogador(nome));
     }
 
-    /** Pré-distribuição que respeita quantidade de jogadores   */
     private void distribuirCartasIniciais() {
         for (int i = 0; i < 7; i++) {
-            for (Jogador j : fila.getJogadores()) {
+            for (Jogador j : lista.getJogadores()) {
                 j.getMao().adicionar(compra.comprar());
             }
         }
@@ -28,7 +24,6 @@ public class Jogo {
 
     public void iniciar() {
         distribuirCartasIniciais();
-        // primeira carta na mesa não pode ser Reverse
         Carta primeira = compra.comprar();
         while (primeira instanceof CartaReverse) {
             compra.empilhar(primeira); compra.embaralhar();
@@ -36,17 +31,16 @@ public class Jogo {
         }
         descarte.empilhar(primeira);
 
-        /* ---------- loop principal ---------- */
         while (true) {
-            Jogador j = fila.atual();
+            Jogador j = lista.atual();
             int resultado = j.jogarTurno(compra, descarte);
 
             if (j.getMao().tamanho() == 0) {
                 System.out.println("\n>>> " + j.getNome() + " VENCEU! <<<");
                 break;
             }
-            if (resultado == 1) fila.inverterDirecao();
-            fila.avancar();
+            if (resultado == 1) lista.inverterDirecao();
+            lista.avancar();
         }
     }
 }

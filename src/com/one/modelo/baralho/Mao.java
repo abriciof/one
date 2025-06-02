@@ -10,7 +10,6 @@ public class Mao {
 
     public int tamanho() { return cartas.size(); }
 
-    /** Procura primeira carta jogável e retorna; senão null. */
     public Carta jogarCartaValida(Carta topo) {
         for (int i = 0; i < cartas.size(); i++) {
             if (cartas.get(i).podeSerJogadaSobre(topo))

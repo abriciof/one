@@ -2,7 +2,7 @@ package com.one.modelo.jogadores;
 
 import java.util.*;
 
-public class FilaJogadores {
+public class ListaJogadores {
     private final List<Jogador> ordem = new ArrayList<>();
     private int indiceDaVez = 0;
     private int direcao = 1;   // 1 horário, -1 anti-horário
