@@ -10,5 +10,5 @@ public final class CartaReverse extends Carta {
     }
 
     @Override
-    public String toString() { return getCor() + "-REVERSE"; }
+    public String toString() { return "REVERSE-" + getCor(); }
 }

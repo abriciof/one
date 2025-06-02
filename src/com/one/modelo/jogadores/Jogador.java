@@ -24,12 +24,29 @@ public class Jogador {
                 compra.embaralhar();
                 descarte.empilhar(salva);
             }
-            mao.adicionar(compra.comprar());
-            System.out.println(nome + " comprou.");
-            return 2;
+            Carta comprada = compra.comprar();
+            mao.adicionar(comprada);
+            System.out.println("\t" + nome + " comprou " + comprada.colorir());
+
+            Carta novaJogada = mao.jogarCartaValida(topo);
+            if (novaJogada == null) {
+                if (compra.tamanho() == 0) {
+                    Carta salva = descarte.comprar();
+                    descarte.moverPara(compra);
+                    compra.embaralhar();
+                    descarte.empilhar(salva);
+                }
+                return 2;
+            }
+    
+            descarte.empilhar(novaJogada);
+            System.out.println(nome + " jogou " + novaJogada.colorir());
+
+            return (novaJogada instanceof CartaReverse) ? 1 : 0;
         }
         descarte.empilhar(jogada);
-        System.out.println(nome + " jogou " + jogada);
+        System.out.println(nome + " jogou " + jogada.colorir());
+
         return (jogada instanceof CartaReverse) ? 1 : 0;
     }
 }

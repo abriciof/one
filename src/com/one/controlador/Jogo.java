@@ -23,12 +23,15 @@ public class Jogo {
     }
 
     public void iniciar() {
+        System.out.println("\tONE!\n");
+
         distribuirCartasIniciais();
         Carta primeira = compra.comprar();
         while (primeira instanceof CartaReverse) {
             compra.empilhar(primeira); compra.embaralhar();
             primeira = compra.comprar();
         }
+        System.out.println("Carta Inicial: " + primeira.colorir() + "\n");
         descarte.empilhar(primeira);
 
         while (true) {

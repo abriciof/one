@@ -11,4 +11,10 @@ public abstract class Carta {
 
     @Override
     public abstract String toString();
+
+    public String colorir(){
+        Cor corAtual = this.getCor();
+        return corAtual.colorir(this.toString());
+    }
+
 }
