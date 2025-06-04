@@ -1,3 +1,5 @@
 .idea
 out/com/*
 out/production/*
+*.txt
+one.iml
