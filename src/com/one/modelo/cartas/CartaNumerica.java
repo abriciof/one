@@ -13,9 +13,9 @@ public final class CartaNumerica extends Carta {
     public boolean podeSerJogadaSobre(Carta topo) {
         if (topo instanceof CartaNumerica){
             CartaNumerica cn = (CartaNumerica) topo;
-            return getCor() == topo.getCor() || numero == cn.getNumero();
+            return getCor().equals(topo.getCor()) || getNumero() == cn.getNumero();
         }
-        return getCor() == topo.getCor();   // topo é Reverse
+        return getCor().equals(topo.getCor());   // topo é da mesma cor
     }
 
     @Override
