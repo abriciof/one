@@ -12,6 +12,6 @@ public final class CartaBloqueio extends Carta {
 
     @Override
     public String toString() {
-        return "BLOQUEIO-" + getCor();
+        return "X";
     }
 }

@@ -43,7 +43,8 @@ public class Jogo {
             )
         );
 
-        System.out.println("[INÍCIO] Carta inicial " + primeira.colorir());
+        System.out.println("[INICIO] Carta inicial \n" + primeira.desenharComoTexto());
+
         descarte.empilhar(primeira);
 
         while (true) {

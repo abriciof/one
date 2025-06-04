@@ -27,7 +27,7 @@ public class Jogador {
         }
 
         descarte.empilhar(jogada);
-        System.out.println("[DESCARTE] " + nome + " jogou " + jogada.colorir());
+        System.out.println("[DESCARTE] " + nome + " jogou \n" + jogada.desenharComoTexto());
 
         verificarOne(compra, descarte);
 
@@ -49,7 +49,7 @@ public class Jogador {
         reporMonteSeNecessario(compra, descarte);
         Carta c = compra.comprar();
         mao.adicionar(c);
-        System.out.println("[COMPRA] " + nome + " comprou " + c.colorir());
+        System.out.println("[COMPRA] " + nome + " comprou \n" + c.desenharComoTexto());
     }
 
     private void verificarOne(Monte compra, Monte descarte) {
