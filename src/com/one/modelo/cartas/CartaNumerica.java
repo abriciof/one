@@ -20,6 +20,6 @@ public final class CartaNumerica extends Carta {
 
     @Override
     public String toString() {
-        return numero + "-" + getCor();
+        return String.valueOf(this.numero);
     }
 }
