@@ -14,39 +14,55 @@ public class Jogador {
     public Mao getMao() { return mao; }
 
     public int jogarTurno(Monte compra, Monte descarte) {
+
+        reporMonteSeNecessario(compra, descarte);
+
         Carta topo = descarte.topo();
         Carta jogada = mao.jogarCartaValida(topo);
 
-        if (jogada == null) {                 // comprar
-            if (compra.tamanho() == 0) {      // repor monte de compra
-                Carta salva = descarte.comprar();
-                descarte.moverPara(compra);
-                compra.embaralhar();
-                descarte.empilhar(salva);
-            }
-            Carta comprada = compra.comprar();
-            mao.adicionar(comprada);
-            System.out.println("\t" + nome + " comprou " + comprada.colorir());
-
-            Carta novaJogada = mao.jogarCartaValida(topo);
-            if (novaJogada == null) {
-                if (compra.tamanho() == 0) {
-                    Carta salva = descarte.comprar();
-                    descarte.moverPara(compra);
-                    compra.embaralhar();
-                    descarte.empilhar(salva);
-                }
-                return 2;
-            }
-    
-            descarte.empilhar(novaJogada);
-            System.out.println(nome + " jogou " + novaJogada.colorir());
-
-            return (novaJogada instanceof CartaReverse) ? 1 : 0;
+        if (jogada == null) {
+            comprarCarta(compra, descarte);
+            jogada = mao.jogarCartaValida(topo);
+            if (jogada == null) return 0;
         }
-        descarte.empilhar(jogada);
-        System.out.println(nome + " jogou " + jogada.colorir());
 
-        return (jogada instanceof CartaReverse) ? 1 : 0;
+        descarte.empilhar(jogada);
+        System.out.println("[DESCARTE] " + nome + " jogou " + jogada.colorir());
+
+        verificarOne(compra, descarte);
+
+        if (jogada instanceof CartaReverse){ return 1; }
+        else if (jogada instanceof CartaBloqueio){ return 2; }
+        else { return 0; }
     }
+
+    private void reporMonteSeNecessario(Monte compra, Monte descarte) {
+        if (compra.tamanho() == 0) {
+            Carta salva = descarte.comprar();
+            descarte.moverPara(compra);
+            compra.embaralhar();
+            descarte.empilhar(salva);
+        }
+    }
+
+    private void comprarCarta(Monte compra, Monte descarte) {
+        reporMonteSeNecessario(compra, descarte);
+        Carta c = compra.comprar();
+        mao.adicionar(c);
+        System.out.println("[COMPRA] " + nome + " comprou " + c.colorir());
+    }
+
+    private void verificarOne(Monte compra, Monte descarte) {
+        if (mao.tamanho() == 1) {
+            boolean gritou = Math.random() < 0.5;
+
+            if (gritou) {
+                System.out.println("[ONE!] " + nome + " gritou ONE!");
+            } else {
+                System.out.println("[PENALIDADE] " + nome + " esqueceu de gritar ONE! Comprando 2.");
+                for (int i = 0; i < 2; i++) comprarCarta(compra, descarte);
+            }
+        }
+    }
+
 }

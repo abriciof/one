@@ -6,7 +6,7 @@ public final class CartaReverse extends Carta {
 
     @Override
     public boolean podeSerJogadaSobre(Carta topo) {
-        return getCor() == topo.getCor() || topo instanceof CartaReverse;
+        return getCor().equals(topo.getCor()) || topo instanceof CartaReverse;
     }
 
     @Override
